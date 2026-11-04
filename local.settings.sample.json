@@ -1,0 +1,15 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "python",
+    "TIMER_SCHEDULE": "0 */15 * * * *",
+    "SUBSCRIPTION_ID": "xxxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxxx",
+    "POLICY_DEFINITION_IDS": "[\"/providers/Microsoft.Authorization/policyDefinitions/e7352ad2-6c86-4a07-9573-47f67b557ba8\"]",
+    "DRY_RUN": "true",
+    "MAX_COMPONENT_AGE_MINUTES": "120",
+    "REQUIRE_SERVING_VERSION": "true",
+    "SENDER_MAILBOX": "",
+    "GOVERNANCE_RECIPIENTS": ""
+  }
+}
