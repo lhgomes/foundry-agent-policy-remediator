@@ -201,6 +201,20 @@ Back in the project terminal with the Python virtual environment activated:
 func start
 ```
 
+For local notification testing with an Azure CLI user login (`az login`), you can automatically use the signed-in user's Entra object ID as the sender instead of copying it manually:
+
+```bash
+SENDER_MAILBOX="$(az ad signed-in-user show --query id -o tsv)" &&
+  export SENDER_MAILBOX &&
+  func start
+```
+
+Remove `SENDER_MAILBOX` from the `Values` object in `local.settings.json` when using this environment-variable approach so local settings do not override it. The lookup must succeed before the host starts. Restart the host after changing the sender.
+
+The user must have an active Exchange Online mailbox, and the authenticating identity must have permission to send from it; see [Configure email notifications](#configure-email-notifications). An Entra object ID alone does not resolve `MailboxNotEnabledForRESTAPI`. Keep `DRY_RUN=true` during setup: dry runs do not send email, and setting `DRY_RUN=false` enables real agent disabling as well as notifications.
+
+This lookup applies only to local user authentication. A deployed Function using managed identity has no signed-in user; configure `SENDER_MAILBOX` explicitly in its application settings.
+
 The sample timer runs every 15 minutes, at minutes 00, 15, 30, and 45. Startup does not explicitly trigger a run, but a past-due scheduled invocation can run immediately after the host starts. Keep `DRY_RUN=true` during setup.
 
 ### 5. Trigger an immediate run
